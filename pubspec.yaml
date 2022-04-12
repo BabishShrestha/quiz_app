@@ -1,0 +1,68 @@
+name: quiz_app
+description: A quiz app that has categories to keep you engaging in different questions, and keep track of your score.
+
+
+
+publish_to: 'none' 
+
+
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.0-10.0.dev <3.0.0'
+
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  
+  cupertino_icons: ^1.0.4
+  flutter_riverpod: ^1.0.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  
+  
+  
+  
+  
+  flutter_lints: ^1.0.4
+
+
+
+
+
+flutter:
+
+  
+  
+  
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  # assets:
+  #   - images/a_dot_burr.jpeg
+  #   - images/a_dot_ham.jpeg
+
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins/Poppins-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/Poppins/Poppins-Light.ttf
+          weight: 200
+        - asset: assets/fonts/Poppins/Poppins-SemiBold.ttf
+          weight: 500
+        - asset: assets/fonts/Poppins/Poppins-Bold.ttf
+          weight: 700
+
+# For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages
