@@ -10,49 +10,42 @@ class QuizHomePage extends StatelessWidget {
     double kCategoryRowWidth = 20;
     double kCategoryColumnHeight = 20;
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.lightBlueAccent,
-        selectedItemColor: Colors.purple,
-        unselectedItemColor: Colors.grey,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.history), label: 'History'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.badge), label: 'Achievement'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-        ],
-        onTap: (_) {},
-      ),
+      bottomNavigationBar: const BottomNavBar(),
       body: SafeArea(
-        child: Column(
+        child: ListView(
+          shrinkWrap: true,
           children: [
-            Expanded(
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                alignment: Alignment.topLeft,
-                decoration: const BoxDecoration(
-                  color: Colors.purple,
-                  borderRadius: BorderRadius.vertical(
-                    bottom: Radius.circular(20),
-                  ),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    SizedBox(
-                      height: 50,
-                    ),
-                    Text(
-                      'Welcome Back!',
-                      style: TextStyle(fontSize: 25),
-                    ),
-                    Text(
-                      'Alphabot',
-                      style: TextStyle(fontSize: 25),
-                    ),
-                  ],
+            Container(
+              padding: const EdgeInsets.all(10),
+              alignment: Alignment.topLeft,
+              decoration: const BoxDecoration(
+                color: Colors.purple,
+                borderRadius: BorderRadius.vertical(
+                  bottom: Radius.circular(20),
                 ),
               ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Text(
+                    'Welcome Back!',
+                    style: TextStyle(fontSize: 25),
+                  ),
+                  Text(
+                    'Alphabot',
+                    style: TextStyle(fontSize: 25),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 50,
             ),
             Container(
               padding: const EdgeInsets.all(15),
@@ -144,6 +137,28 @@ class QuizHomePage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class BottomNavBar extends StatelessWidget {
+  const BottomNavBar({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      backgroundColor: Colors.lightBlueAccent,
+      selectedItemColor: Colors.purple,
+      unselectedItemColor: Colors.grey,
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+        BottomNavigationBarItem(icon: Icon(Icons.history), label: 'History'),
+        BottomNavigationBarItem(icon: Icon(Icons.badge), label: 'Achievement'),
+        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+      ],
+      onTap: (_) {},
     );
   }
 }
