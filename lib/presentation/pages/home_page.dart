@@ -1,164 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:quiz_app/domain/entities/category.dart';
+import 'package:quiz_app/presentation/widgets/widgets.dart';
 
-import '../../constants.dart';
+import '../../data/data_sources/quiz_remote_data_source.dart';
 
-class QuizHomePage extends StatelessWidget {
+class QuizHomePage extends StatefulWidget {
   const QuizHomePage({Key? key}) : super(key: key);
+  @override
+  State<QuizHomePage> createState() => _QuizHomePageState();
+}
+
+class _QuizHomePageState extends State<QuizHomePage> {
+  @override
+  void initState() {
+    super.initState();
+    quizget();
+  }
+
+  void quizget() async {
+    CategoryRemoteDataSourceImpl categoryRemoteDataSourceImpl =
+        CategoryRemoteDataSourceImpl(client: http.Client());
+    List<Quiz_Category> categories =
+        await categoryRemoteDataSourceImpl.getCategoryItem();
+    print(await categories.toString());
+  }
 
   @override
   Widget build(BuildContext context) {
-    double kCategoryRowWidth = 20;
-    double kCategoryColumnHeight = 20;
+    quizget();
     return Scaffold(
       bottomNavigationBar: const BottomNavBar(),
       body: SafeArea(
-        child: ListView(
-          shrinkWrap: true,
+        child: Column(
           children: [
-            Container(
-              padding: const EdgeInsets.all(10),
-              alignment: Alignment.topLeft,
-              decoration: const BoxDecoration(
-                color: Colors.purple,
-                borderRadius: BorderRadius.vertical(
-                  bottom: Radius.circular(20),
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Text(
-                    'Welcome Back!',
-                    style: TextStyle(fontSize: 25),
-                  ),
-                  Text(
-                    'Alphabot',
-                    style: TextStyle(fontSize: 25),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                ],
-              ),
-            ),
+            WelcomeCard(),
             const SizedBox(
               height: 50,
             ),
-            Container(
-              padding: const EdgeInsets.all(15),
-              alignment: Alignment.topLeft,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      title: const Text('Choose Categories',
-                          style: kCategoryTextStyle),
-                      trailing: TextButton(
-                        onPressed: () {},
-                        child: Text('See all',
-                            style: kHomeTextStyle.copyWith(fontSize: 18)),
-                      )),
-                  SizedBox(
-                    height: kCategoryColumnHeight,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      const Expanded(
-                        child: Placeholder(
-                          fallbackHeight: 100,
-                          fallbackWidth: 100,
-                        ),
-                      ),
-                      SizedBox(
-                        width: kCategoryRowWidth,
-                      ),
-                      const Expanded(
-                        child: Placeholder(
-                          fallbackHeight: 100,
-                          fallbackWidth: 100,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: kCategoryColumnHeight,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      const Expanded(
-                        child: Placeholder(
-                          fallbackHeight: 100,
-                          fallbackWidth: 100,
-                        ),
-                      ),
-                      SizedBox(
-                        width: kCategoryRowWidth,
-                      ),
-                      const Expanded(
-                        child: Placeholder(
-                          fallbackHeight: 100,
-                          fallbackWidth: 100,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: kCategoryColumnHeight,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      const Expanded(
-                        child: Placeholder(
-                          fallbackHeight: 100,
-                          fallbackWidth: 100,
-                        ),
-                      ),
-                      SizedBox(
-                        width: kCategoryRowWidth,
-                      ),
-                      const Expanded(
-                        child: Placeholder(
-                          fallbackHeight: 100,
-                          fallbackWidth: 100,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            Expanded(child: CategorySection()),
           ],
         ),
       ),
-    );
-  }
-}
-
-class BottomNavBar extends StatelessWidget {
-  const BottomNavBar({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      backgroundColor: Colors.lightBlueAccent,
-      selectedItemColor: Colors.purple,
-      unselectedItemColor: Colors.grey,
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.history), label: 'History'),
-        BottomNavigationBarItem(icon: Icon(Icons.badge), label: 'Achievement'),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-      ],
-      onTap: (_) {},
     );
   }
 }
