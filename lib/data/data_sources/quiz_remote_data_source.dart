@@ -30,7 +30,7 @@ class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
 
       return CategoryModel.fromData(category_pool);
     } else {
-      throw UnimplementedError("Not loaded");
+      throw UnimplementedError(response.reasonPhrase);
     }
   }
 }
