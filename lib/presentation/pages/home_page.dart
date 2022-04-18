@@ -1,22 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
 import 'package:quiz_app/domain/entities/category.dart';
 import 'package:quiz_app/presentation/widgets/widgets.dart';
 
 import '../../constants.dart';
-import '../../data/data_sources/quiz_remote_data_source.dart';
+import '../state_mgmt/api_provider.dart';
 
 class QuizHomePage extends StatelessWidget {
-  const QuizHomePage({Key? key}) : super(key: key);
-
-  Future<List<Quiz_Category>> getCategory() async {
-    CategoryRemoteDataSourceImpl categoryRemoteDataSourceImpl =
-        CategoryRemoteDataSourceImpl(client: http.Client());
-    List<Quiz_Category> categories =
-        await categoryRemoteDataSourceImpl.getCategoryItem();
-    return categories;
-  }
+  QuizHomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,21 +22,23 @@ class QuizHomePage extends StatelessWidget {
               height: 50,
             ),
             Expanded(
-                child: FutureBuilder<List<Quiz_Category>>(
-                    future: getCategory(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        List<Quiz_Category> quiz_category = snapshot.data!;
-                        return CategorySection(quiz_category: quiz_category);
-                      } else if (snapshot.hasError) {
-                        return LottieBuilder.asset(
-                            'assets/animation/404-page-error.json');
-                      } else {}
-                      return const Center(
-                          child: CircularProgressIndicator(
-                        color: kAppBarColor,
-                      ));
-                    })),
+              child: Consumer(
+                builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                  final categoryPool = ref.watch(category_valueProvider);
+                  return categoryPool.when(
+                      data: (data) {
+                        List<Quiz_Category> quizCategory = data;
+                        return CategorySection(quiz_category: quizCategory);
+                      },
+                      error: (error, stackTrace) => LottieBuilder.asset(
+                          'assets/animation/404-page-error.json'),
+                      loading: () => const Center(
+                              child: CircularProgressIndicator(
+                            color: kAppBarColor,
+                          )));
+                },
+              ),
+            ),
           ],
         ),
       ),
