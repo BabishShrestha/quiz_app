@@ -3,8 +3,8 @@ class Quiz_Category {
   final String name;
 
   Quiz_Category({required this.id, required this.name});
-  @override
-  String toString() {
-    return '$id ,$name ';
-  }
+  // @override
+  // String toString() {
+  //   return '$id ,$name ';
+  // }
 }
