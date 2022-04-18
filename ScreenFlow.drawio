@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-04-18T01:27:48.145Z" agent="5.0 (Windows)" etag="IYecYJK_wELdyFRJ_RAm" version="17.4.5" type="github">
+<mxfile host="app.diagrams.net" modified="2022-04-18T01:31:55.133Z" agent="5.0 (Windows)" etag="VMYVV6XU9dJomWzJl6ku" version="17.4.5" type="github">
   <diagram id="r85W_lFaW2qg85bilHJI" name="Page-1">
-    <mxGraphModel dx="2299" dy="2038" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="2943" dy="2456" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -11,7 +11,11 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="HrsS4rz3L-KnJRJTXIfa-8" value="" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;elbow=vertical;" parent="1" source="HrsS4rz3L-KnJRJTXIfa-7" target="HrsS4rz3L-KnJRJTXIfa-1" edge="1">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="350" y="40" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="HrsS4rz3L-KnJRJTXIfa-1" value="Home" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
           <mxGeometry x="-190" y="80" width="120" height="60" as="geometry" />
@@ -40,10 +44,17 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="HrsS4rz3L-KnJRJTXIfa-14" value="" style="edgeStyle=elbowEdgeStyle;shape=connector;rounded=0;orthogonalLoop=1;jettySize=auto;elbow=vertical;html=1;labelBackgroundColor=default;fontFamily=Helvetica;fontSize=11;fontColor=default;endArrow=classic;strokeColor=default;" parent="1" source="HrsS4rz3L-KnJRJTXIfa-7" target="HrsS4rz3L-KnJRJTXIfa-13" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="510" y="40" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GPSS0VCo-oDMTIZu6hSv-3" value="" style="edgeStyle=elbowEdgeStyle;shape=connector;rounded=0;orthogonalLoop=1;jettySize=auto;elbow=vertical;html=1;labelBackgroundColor=default;fontFamily=Helvetica;fontSize=11;fontColor=default;endArrow=classic;strokeColor=default;" edge="1" parent="1" source="HrsS4rz3L-KnJRJTXIfa-7" target="GPSS0VCo-oDMTIZu6hSv-2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="HrsS4rz3L-KnJRJTXIfa-7" value="Landing Screen" style="whiteSpace=wrap;html=1;rounded=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
-          <mxGeometry x="300" y="-60" width="120" height="60" as="geometry" />
+          <mxGeometry x="290" y="-250" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="HrsS4rz3L-KnJRJTXIfa-9" value="Leaderboard" style="whiteSpace=wrap;html=1;rounded=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
           <mxGeometry x="180" y="90" width="120" height="60" as="geometry" />
@@ -80,6 +91,9 @@
         </mxCell>
         <mxCell id="HrsS4rz3L-KnJRJTXIfa-50" value="True" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontFamily=Helvetica;fontColor=default;" parent="1" vertex="1">
           <mxGeometry x="-40" y="480" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="GPSS0VCo-oDMTIZu6hSv-2" value="&lt;br&gt;&lt;div&gt;Splash Screen&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="-110" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
