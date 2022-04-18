@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
+import 'package:quiz_app/domain/entities/category.dart';
 import 'package:quiz_app/presentation/state_mgmt/categoryProvider.dart';
 
 class CategorySection extends StatefulWidget {
+  final List<Quiz_Category> quiz_category;
+
+  const CategorySection({required this.quiz_category});
   @override
   State<CategorySection> createState() => _CategorySectionState();
 }
@@ -46,7 +50,7 @@ class _CategorySectionState extends State<CategorySection>
       alignment: Alignment.topLeft,
       child: GridView.builder(
           physics: const BouncingScrollPhysics(),
-          itemCount: categoryAnimation.length,
+          itemCount: 6,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 1.2,
@@ -83,14 +87,14 @@ class _CategorySectionState extends State<CategorySection>
                           })),
                           Text(
                               textAlign: TextAlign.center,
-                              "${categoryAnimation[index].substring(28)}")
+                              "${widget.quiz_category[index].name}")
                         ],
                       )
                     : Column(
                         children: [
                           Text(
                               textAlign: TextAlign.center,
-                              "${categoryAnimation[index].substring(28)}")
+                              "${widget.quiz_category[index].name}")
                         ],
                       ),
               ),
