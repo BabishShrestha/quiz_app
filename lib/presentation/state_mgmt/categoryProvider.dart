@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CategoryItem with ChangeNotifier {
+class CategoryItemNotifier with ChangeNotifier {
   int currentindex = -1;
   void checkItem(int index) {
     currentindex = index;

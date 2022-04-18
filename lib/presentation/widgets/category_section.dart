@@ -57,7 +57,8 @@ class _CategorySectionState extends State<CategorySection>
               crossAxisSpacing: 10.0,
               mainAxisSpacing: 10.0),
           itemBuilder: (context, index) {
-            var selectedcategoryProvider = Provider((ref) => CategoryItem());
+            var selectedcategoryProvider =
+                Provider((ref) => CategoryItemNotifier());
             return Consumer(
               builder: (BuildContext context, WidgetRef ref, Widget? child) =>
                   MaterialButton(
