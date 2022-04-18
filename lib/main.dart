@@ -23,7 +23,7 @@ class QuizApp extends StatelessWidget {
         fontFamily: 'Poppins',
         primarySwatch: Colors.blue,
       ),
-      home: const QuizHomePage(),
+      home: QuizHomePage(),
     );
   }
 }
