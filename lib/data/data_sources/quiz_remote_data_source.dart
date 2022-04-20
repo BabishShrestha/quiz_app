@@ -3,18 +3,27 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:quiz_app/data/model/category_model.dart';
 import 'package:quiz_app/domain/entities/category.dart';
+import 'package:quiz_app/domain/entities/questions.dart';
 
-abstract class CategoryRemoteDataSource {
+import '../model/question_model.dart';
+
+abstract class QuizRemoteDataSource {
   /// Calls the https://opentdb.com/api_category.php endpoint.
   ///
   /// Throws a [ServerException] for all error codes.
   Future<List<Quiz_Category>> getCategoryItem();
+
+  /// Calls the https://opentdb.com/api.php?amount=10 endpoint.
+  ///
+  /// Throws a [ServerException] for all error codes.
+  Future<List<Questions>> getQuestions(
+      Quiz_Category category, String? difficulty);
 }
 
-class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
+class QuizRemoteDataSourceImpl extends QuizRemoteDataSource {
   final http.Client client;
 
-  CategoryRemoteDataSourceImpl({required this.client});
+  QuizRemoteDataSourceImpl({required this.client});
   @override
   Future<List<Quiz_Category>> getCategoryItem() {
     return _getCategoryFromURL("https://opentdb.com/api_category.php");
@@ -29,6 +38,30 @@ class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
               jsonDecode(response.body)['trivia_categories']);
 
       return CategoryModel.fromData(category_pool);
+    } else {
+      throw UnimplementedError(response.reasonPhrase);
+    }
+  }
+
+  @override
+  Future<List<Questions>> getQuestions(
+      Quiz_Category category, String? difficulty) {
+    String url =
+        "https://opentdb.com/api.php?amount=10&category=${category.id}";
+    if (difficulty != null) {
+      url = "$url&difficulty=$difficulty";
+    }
+
+    return getQuestionFromURL(url);
+  }
+
+  Future<List<Questions>> getQuestionFromURL(String url) async {
+    //gets response from API
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      List<Map<String, dynamic>> question_pool =
+          List<Map<String, dynamic>>.from(jsonDecode(response.body)['results']);
+      return QuestionModel.fromData(question_pool);
     } else {
       throw UnimplementedError(response.reasonPhrase);
     }
