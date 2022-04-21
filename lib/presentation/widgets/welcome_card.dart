@@ -12,7 +12,12 @@ class WelcomeCard extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       alignment: Alignment.topLeft,
       decoration: const BoxDecoration(
-        color: Colors.purple,
+        gradient: LinearGradient(
+          colors: [
+            const Color(0xFF3366FF),
+            const Color(0xFF00CCFF),
+          ],
+        ),
         borderRadius: BorderRadius.vertical(
           bottom: Radius.circular(20),
         ),
