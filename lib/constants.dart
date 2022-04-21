@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-const kAppBarColor = Colors.purple;
+const kAppBarColor = Color(0xFF00CCFF);
 const kPrimaryScaffoldColor = Colors.white;
 
 const kHomeTextStyle = TextStyle(
@@ -11,11 +11,19 @@ const kCategoryTextStyle = TextStyle(
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w600,
     color: kAppBarColor);
-var kQuestionStyle = TextStyle(
+const kCategoryItemStyle = TextStyle(
+    fontSize: 16, fontFamily: 'Poppins', color: kPrimaryScaffoldColor);
+const kQuestionStyle = TextStyle(
   fontFamily: 'Poppins',
-  color: Colors.purple.shade900,
+  color: kPrimaryScaffoldColor,
+  fontWeight: FontWeight.w400,
   fontSize: 16,
 );
+const kResultTextStyle = TextStyle(
+    fontSize: 16,
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.w600,
+    color: kPrimaryScaffoldColor);
 
 List<String> categoryAnimation = [
   'assets/animation/categories/spinning-globe.json',
