@@ -1,27 +1,39 @@
-import 'package:quiz_app/domain/entities/category.dart';
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
-abstract class CategoryLocalDataSource {
+import '../model/category_model.dart';
+
+abstract class QuizLocalDataSource {
   /// Gets the cached list of [Category Model ] which was gotten the last time
   /// the user had an internet connection.
   ///
   /// Throws [CacheException] if no cached data is present.
-  Future<List<Quiz_Category>> getLoadedQuizCategory();
-  Future<void> cacheQuizCategory(List<Quiz_Category> categorypool_to_cache);
+  Future<CategoryModel> getQuizCategory();
+  Future<void> cacheQuizCategory(List<CategoryModel> categorypoolToCache);
 }
 
-class CategoryLocalDataSourceImpl extends CategoryLocalDataSource {
+class QuizLocalDataSourceImpl extends QuizLocalDataSource {
   final SharedPreferences sharedPreference;
 
-  CategoryLocalDataSourceImpl({required this.sharedPreference});
+  final String _Cached_Quiz_Category = 'CACHED_QUIZ_CATEGORY';
+
+  QuizLocalDataSourceImpl({required this.sharedPreference});
 
   @override
-  Future<List<Quiz_Category>> getLoadedQuizCategory() {
-    throw UnimplementedError();
+  Future<CategoryModel> getQuizCategory() {
+    final jsonString = sharedPreference.getString(_Cached_Quiz_Category);
+    if (jsonString != null) {
+      return Future.value(CategoryModel.fromJson(jsonDecode(jsonString)));
+    } else {
+      throw UnimplementedError();
+    }
   }
 
   @override
-  Future<void> cacheQuizCategory(List<Quiz_Category> categorypool_to_cache) {
-    throw UnimplementedError();
+  Future<void> cacheQuizCategory(List<CategoryModel> categorypoolToCache) {
+    return sharedPreference.setString(_Cached_Quiz_Category,
+        jsonEncode(categorypoolToCache.map((category) => category.toJson())));
   }
 }
