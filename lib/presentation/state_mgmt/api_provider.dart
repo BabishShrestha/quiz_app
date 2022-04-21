@@ -10,6 +10,7 @@ final apiProvider = Provider<QuizRemoteDataSourceImpl>(
 
 final category_valueProvider = FutureProvider<List<Quiz_Category>>(
     (ref) async => await ref.read(apiProvider).getCategoryItem());
+
 FutureProvider<List<Questions>> QuestionValueProvider(
     Quiz_Category selectedcategory, String? difficulty) {
   return FutureProvider<List<Questions>>((ref) async => await ref
