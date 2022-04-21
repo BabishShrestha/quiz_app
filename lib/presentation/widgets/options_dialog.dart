@@ -13,30 +13,29 @@ List<String> difficulty = ['Any', 'Easy', 'Medium', 'Hard'];
 class OptionDialog extends StatefulWidget {
   Quiz_Category selectedcategory;
 
-  OptionDialog({required this.selectedcategory});
+  OptionDialog({Key? key, required this.selectedcategory}) : super(key: key);
 
   @override
   State<OptionDialog> createState() => _OptionDialogState();
 }
 
-String? _value = " ";
+String? _value;
 bool start = false;
 
 class _OptionDialogState extends State<OptionDialog> {
   @override
   Widget build(BuildContext context) {
-    final question_valueProvider = QuestionValueProvider(
+    final questionValueProvider = QuestionValueProvider(
         widget.selectedcategory, _value == 'Any' ? null : _value);
     return start && _value != null
         ? Consumer(
             builder: (BuildContext context, WidgetRef ref, Widget? child) {
               start = false;
-              final questionPool = ref.watch(question_valueProvider);
+              final questionPool = ref.watch(questionValueProvider);
 
               return questionPool.when(
                 data: (data) {
                   List<Questions> questions = data;
-
                   return QuestionPage(questionpool: questions);
                 },
                 error: (error, stackTrace) =>
@@ -52,7 +51,7 @@ class _OptionDialogState extends State<OptionDialog> {
         : AlertDialog(
             clipBehavior: Clip.hardEdge,
             actionsAlignment: MainAxisAlignment.center,
-            contentPadding: EdgeInsets.all(10),
+            contentPadding: const EdgeInsets.all(10),
             backgroundColor: kPrimaryScaffoldColor,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -66,7 +65,7 @@ class _OptionDialogState extends State<OptionDialog> {
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('Enter Difficulty:'),
+                const Text('Enter Difficulty:'),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -91,7 +90,7 @@ class _OptionDialogState extends State<OptionDialog> {
                       start = !start;
                     });
                   },
-                  child: Text('Start Quiz'))
+                  child: const Text('Start Quiz'))
             ],
           );
   }
