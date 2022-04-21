@@ -29,6 +29,10 @@ dependencies:
   http: ^0.13.4
   #for local cache
   shared_preferences: ^2.0.13
+  #for formatting unescaped tags of html
+  html_unescape: ^2.0.0
+  #for icons
+  font_awesome_flutter: ^10.1.0
 
 dev_dependencies:
   flutter_test:
