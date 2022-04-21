@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quiz_app/presentation/pages/home_page.dart';
 
+import 'constants.dart';
+
 void main() {
   runApp(
     const ProviderScope(
@@ -17,13 +19,14 @@ class QuizApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Quiz App',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: 'Poppins',
-        primarySwatch: Colors.blue,
-      ),
-      home: QuizHomePage(),
-    );
+        title: 'Quiz App',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(primary: kAppBarColor)),
+          fontFamily: 'Poppins',
+          primarySwatch: Colors.blue,
+        ),
+        home: QuizHomePage());
   }
 }
