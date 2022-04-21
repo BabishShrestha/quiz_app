@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
 import 'package:quiz_app/domain/entities/category.dart';
-import 'package:quiz_app/presentation/state_mgmt/categoryProvider.dart';
+import 'package:quiz_app/presentation/widgets/options_dialog.dart';
+
+import '../../constants.dart';
 
 class CategorySection extends StatefulWidget {
   final List<Quiz_Category> quiz_category;
@@ -14,30 +15,17 @@ class CategorySection extends StatefulWidget {
 
 class _CategorySectionState extends State<CategorySection>
     with TickerProviderStateMixin {
-  late final AnimationController _animationController;
   final double kCategoryRowWidth = 20;
 
   final double kCategoryColumnHeight = 20;
-  List<String> categoryAnimation = [
-    'assets/animation/categories/spinning-globe.json',
-    'assets/animation/categories/book-app.json',
-    'assets/animation/categories/film-clipper.json',
-    'assets/animation/categories/music.json',
-    'assets/animation/categories/theater-masks.json',
-    'assets/animation/categories/retro-television-tv.json',
-  ];
 
   @override
   void initState() {
     super.initState();
-
-    _animationController =
-        AnimationController(vsync: this, duration: Duration.zero);
   }
 
   @override
   void dispose() {
-    _animationController.dispose();
     super.dispose();
   }
 
@@ -45,60 +33,63 @@ class _CategorySectionState extends State<CategorySection>
 
   @override
   Widget build(BuildContext context) {
+    Quiz_Category selected = Quiz_Category(id: 9, name: '');
     return Container(
       padding: const EdgeInsets.all(15),
       alignment: Alignment.topLeft,
       child: GridView.builder(
           physics: const BouncingScrollPhysics(),
-          itemCount: 6,
+          itemCount: widget.quiz_category.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 1.2,
               crossAxisSpacing: 10.0,
               mainAxisSpacing: 10.0),
           itemBuilder: (context, index) {
-            var selectedcategoryProvider =
-                Provider((ref) => CategoryItemNotifier());
-            return Consumer(
-              builder: (BuildContext context, WidgetRef ref, Widget? child) =>
-                  MaterialButton(
-                onPressed: () {
-                  setState(() {
-                    // ref.read(selectedcategoryProvider).checkItem(index);
-                    tapIndex = index;
-                    if (_animationController.isCompleted) {
-                      _animationController.reset();
-                    }
-                  });
-
-                  _animationController.forward();
-                },
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                clipBehavior: Clip.hardEdge,
-                child: tapIndex == index
-                    ? Column(
-                        children: [
-                          Expanded(
-                              child: Lottie.asset(categoryAnimation[index],
-                                  controller: _animationController,
-                                  onLoaded: (composition) {
-                            _animationController.duration =
-                                composition.duration;
-                          })),
-                          Text(
-                              textAlign: TextAlign.center,
-                              "${widget.quiz_category[index].name}")
-                        ],
-                      )
-                    : Column(
-                        children: [
-                          Text(
-                              textAlign: TextAlign.center,
-                              "${widget.quiz_category[index].name}")
-                        ],
-                      ),
-              ),
+            return MaterialButton(
+              onPressed: () {
+                setState(() {
+                  // ref.read(selectedcategoryProvider).checkItem(index);
+                  tapIndex = index;
+                  selected = widget.quiz_category[tapIndex];
+                });
+                showDialog(
+                    context: context,
+                    builder: (context) => OptionDialog(
+                          selectedcategory: selected,
+                        ));
+              },
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
+              clipBehavior: Clip.hardEdge,
+              child: index == tapIndex
+                  ? Column(
+                      children: [
+                        Expanded(
+                            child: index < categoryAnimation.length
+                                ? Lottie.asset(
+                                    categoryAnimation[index],
+                                  )
+                                : Icon(iconlist[index - 6])),
+                        Text(
+                            textAlign: TextAlign.center,
+                            widget.quiz_category[index].name)
+                      ],
+                    )
+                  : Column(
+                      children: [
+                        Expanded(
+                            child: index < categoryAnimation.length
+                                ? Lottie.asset(
+                                    categoryAnimation[index],
+                                    animate: false,
+                                  )
+                                : Icon(iconlist[index - 6])),
+                        Text(
+                            textAlign: TextAlign.center,
+                            "${widget.quiz_category[index].name}")
+                      ],
+                    ),
             );
           }),
     );

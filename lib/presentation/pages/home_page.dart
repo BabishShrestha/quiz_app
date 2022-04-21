@@ -21,6 +21,7 @@ class QuizHomePage extends StatelessWidget {
             const SizedBox(
               height: 50,
             ),
+            Text('Categories', style: kCategoryTextStyle),
             Expanded(
               child: Consumer(
                 builder: (BuildContext context, WidgetRef ref, Widget? child) {
