@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/constants.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
@@ -9,7 +10,7 @@ class BottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       backgroundColor: Colors.lightBlueAccent,
-      selectedItemColor: Colors.purple,
+      selectedItemColor: kAppBarColor,
       unselectedItemColor: Colors.grey,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
