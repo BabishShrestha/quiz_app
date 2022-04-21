@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/constants.dart';
 
 class WelcomeCard extends StatelessWidget {
   const WelcomeCard({
@@ -24,11 +25,11 @@ class WelcomeCard extends StatelessWidget {
           ),
           Text(
             'Welcome Back!',
-            style: TextStyle(fontSize: 25),
+            style: kHomeTextStyle,
           ),
           Text(
             'Alphabot',
-            style: TextStyle(fontSize: 25),
+            style: kHomeTextStyle,
           ),
           SizedBox(
             height: 30,
