@@ -35,7 +35,6 @@ class _CategorySectionState extends State<CategorySection>
   Widget build(BuildContext context) {
     Quiz_Category selected = Quiz_Category(id: 9, name: '');
     return Container(
-      padding: const EdgeInsets.all(15),
       alignment: Alignment.topLeft,
       child: GridView.builder(
           physics: const BouncingScrollPhysics(),
@@ -47,51 +46,70 @@ class _CategorySectionState extends State<CategorySection>
               mainAxisSpacing: 10.0),
           itemBuilder: (context, index) {
             return MaterialButton(
-              onPressed: () {
-                setState(() {
-                  // ref.read(selectedcategoryProvider).checkItem(index);
-                  tapIndex = index;
-                  selected = widget.quiz_category[tapIndex];
-                });
-                showDialog(
-                    context: context,
-                    builder: (context) => OptionDialog(
-                          selectedcategory: selected,
-                        ));
-              },
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              clipBehavior: Clip.hardEdge,
-              child: index == tapIndex
-                  ? Column(
-                      children: [
-                        Expanded(
-                            child: index < categoryAnimation.length
-                                ? Lottie.asset(
-                                    categoryAnimation[index],
-                                  )
-                                : Icon(iconlist[index - 6])),
-                        Text(
-                            textAlign: TextAlign.center,
-                            widget.quiz_category[index].name)
-                      ],
-                    )
-                  : Column(
-                      children: [
-                        Expanded(
-                            child: index < categoryAnimation.length
-                                ? Lottie.asset(
-                                    categoryAnimation[index],
-                                    animate: false,
-                                  )
-                                : Icon(iconlist[index - 6])),
-                        Text(
-                            textAlign: TextAlign.center,
-                            "${widget.quiz_category[index].name}")
-                      ],
-                    ),
-            );
+                padding: const EdgeInsets.all(12),
+                // color: Color(0xFF00FCFF),
+                onPressed: () {
+                  setState(() {
+                    // ref.read(selectedcategoryProvider).checkItem(index);
+                    tapIndex = index;
+                    selected = widget.quiz_category[tapIndex];
+                  });
+                  showDialog(
+                      context: context,
+                      builder: (context) => OptionDialog(
+                            selectedcategory: selected,
+                          ));
+                },
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                clipBehavior: Clip.hardEdge,
+                child: index == tapIndex
+                    ? CategoryItem(
+                        index: index,
+                        name: widget.quiz_category[index].name,
+                        animate: true,
+                      )
+                    : CategoryItem(
+                        index: index,
+                        name: widget.quiz_category[index].name,
+                        animate: false));
           }),
+    );
+  }
+}
+
+class CategoryItem extends StatelessWidget {
+  const CategoryItem({
+    Key? key,
+    required this.index,
+    required this.name,
+    required this.animate,
+  }) : super(key: key);
+
+  final int index;
+  final String name;
+  final bool animate;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Expanded(
+            child: index < categoryAnimation.length
+                ? Lottie.asset(
+                    categoryAnimation[index],
+                    animate: animate,
+                  )
+                : Icon(
+                    iconlist[index - 6],
+                    color: kPrimaryScaffoldColor,
+                  )),
+        Text(
+          textAlign: TextAlign.center,
+          name,
+          style: kCategoryItemStyle,
+        )
+      ],
     );
   }
 }
