@@ -13,4 +13,11 @@ class CategoryModel extends Quiz_Category {
         .map((category) => CategoryModel.fromJson(category))
         .toList();
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      // 'id': id,
+      'name': name,
+    };
+  }
 }
