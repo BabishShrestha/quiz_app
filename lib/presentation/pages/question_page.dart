@@ -20,9 +20,9 @@ class _QuestionPageState extends State<QuestionPage> {
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
-    print(selectedanswers);
+    // print(selectedanswers);
     Questions question = widget.questionpool[currentIndex];
-    print(question.correctanswer);
+    // print(question.correctanswer);
     final List<dynamic> options = question.incorrectanswers;
     if (!options.contains(question.correctanswer)) {
       options.add(question.correctanswer);
@@ -30,18 +30,18 @@ class _QuestionPageState extends State<QuestionPage> {
     }
     // var OptionColor = Colors.purple;
     return WillPopScope(
-      onWillPop: _onWillPop,
+      onWillPop: onWillPop,
       child: Scaffold(
         body: SafeArea(
           child: Stack(
             clipBehavior: Clip.none,
             children: [
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     gradient: LinearGradient(
                   colors: [
-                    const Color(0xFF3366FF),
-                    const Color(0xFF00CCFF),
+                    Color(0xFF3366FF),
+                    Color(0xFF00CCFF),
                   ],
                 )),
                 height: MediaQuery.of(context).size.height * 0.5,
@@ -59,11 +59,11 @@ class _QuestionPageState extends State<QuestionPage> {
                             color: kPrimaryScaffoldColor, fontSize: 25),
                       ),
                     ),
-                    Container(
-                      alignment: Alignment.topRight,
-                      padding: const EdgeInsets.all(10),
-                      child: const Text('0:30'),
-                    ),
+                    // Container(
+                    //   alignment: Alignment.topRight,
+                    //   padding: const EdgeInsets.all(10),
+                    //   child: const Text('0:30'),
+                    // ),
                     const SizedBox(
                       height: 20,
                     ),
@@ -129,13 +129,13 @@ class _QuestionPageState extends State<QuestionPage> {
     );
   }
 
-  Future<bool> _onWillPop() async {
+  Future<bool> onWillPop() async {
     return (await showDialog(
           context: context,
           builder: (_) {
             return AlertDialog(
               content: const Text(
-                  "Are you sure you want to forfeit? All your progress will be lost."),
+                  "Are you sure you want to quit? All your progress will be lost."),
               title: const Text("Warning!"),
               actions: <Widget>[
                 TextButton(
