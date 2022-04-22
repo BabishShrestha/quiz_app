@@ -33,11 +33,10 @@ class QuizRemoteDataSourceImpl extends QuizRemoteDataSource {
     final response = await client.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
-      List<Map<String, dynamic>> category_pool =
-          List<Map<String, dynamic>>.from(
-              jsonDecode(response.body)['trivia_categories']);
+      List<Map<String, dynamic>> categoryPool = List<Map<String, dynamic>>.from(
+          jsonDecode(response.body)['trivia_categories']);
 
-      return CategoryModel.fromData(category_pool);
+      return CategoryModel.fromData(categoryPool);
     } else {
       throw UnimplementedError(response.reasonPhrase);
     }
@@ -59,9 +58,9 @@ class QuizRemoteDataSourceImpl extends QuizRemoteDataSource {
     //gets response from API
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
-      List<Map<String, dynamic>> question_pool =
+      List<Map<String, dynamic>> questionPool =
           List<Map<String, dynamic>>.from(jsonDecode(response.body)['results']);
-      return QuestionModel.fromData(question_pool);
+      return QuestionModel.fromData(questionPool);
     } else {
       throw UnimplementedError(response.reasonPhrase);
     }
