@@ -28,6 +28,7 @@ class _OptionDialogState extends State<OptionDialog> {
   Widget build(BuildContext context) {
     final questionValueProvider = QuestionValueProvider(
         widget.selectedcategory, _value == 'Any' ? null : _value);
+
     return start && _value != null
         ? Consumer(
             builder: (BuildContext context, WidgetRef ref, Widget? child) {
@@ -37,10 +38,29 @@ class _OptionDialogState extends State<OptionDialog> {
               return questionPool.when(
                 data: (data) {
                   List<Questions> questions = data;
-                  return QuestionPage(questionpool: questions);
+                  if (questions.isNotEmpty) {
+                    return QuestionPage(questionpool: questions);
+                  } else {
+                    return Scaffold(
+                        body: Center(
+                      child: LottieBuilder.asset(
+                          'assets/animation/404-page-error.json'),
+                    ));
+                  }
                 },
-                error: (error, stackTrace) =>
-                    LottieBuilder.asset('assets/animation/404-page-error.json'),
+                error: (error, stackTrace) {
+                  // print(error);
+                  return Scaffold(
+                    body: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(error.toString()),
+                        LottieBuilder.asset(
+                            'assets/animation/404-page-error.json'),
+                      ],
+                    ),
+                  );
+                },
                 loading: () => const Center(
                   child: CircularProgressIndicator(
                     color: kAppBarColor,
