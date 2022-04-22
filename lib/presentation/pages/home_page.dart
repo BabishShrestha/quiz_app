@@ -8,7 +8,7 @@ import '../../constants.dart';
 import '../state_mgmt/api_provider.dart';
 
 class QuizHomePage extends StatelessWidget {
-  QuizHomePage({Key? key}) : super(key: key);
+  const QuizHomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

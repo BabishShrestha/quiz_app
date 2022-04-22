@@ -14,8 +14,8 @@ class WelcomeCard extends StatelessWidget {
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            const Color(0xFF3366FF),
-            const Color(0xFF00CCFF),
+            Color(0xFF3366FF),
+            Color(0xFF00CCFF),
           ],
         ),
         borderRadius: BorderRadius.vertical(

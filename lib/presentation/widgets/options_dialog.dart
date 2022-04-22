@@ -11,9 +11,10 @@ import '../state_mgmt/api_provider.dart';
 List<String> difficulty = ['Any', 'Easy', 'Medium', 'Hard'];
 
 class OptionDialog extends StatefulWidget {
-  Quiz_Category selectedcategory;
+  final Quiz_Category selectedcategory;
 
-  OptionDialog({Key? key, required this.selectedcategory}) : super(key: key);
+  const OptionDialog({Key? key, required this.selectedcategory})
+      : super(key: key);
 
   @override
   State<OptionDialog> createState() => _OptionDialogState();
